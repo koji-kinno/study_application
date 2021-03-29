@@ -1,0 +1,29 @@
+{% extends 'hello/base.html' %}
+
+{% block title %}削除ページ{% endblock %}
+
+{% block content %}
+<main>
+<h2><span class="under">勉強記録の削除</span></h2>
+<h5>※以下の記録を削除します。</h5>
+<table>
+    <tr>
+        <th>年</th>
+        <th>月</th>
+        <th>日</th>
+        <th>勉強時間(Hr)</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>{{obj.year}}</td>
+        <td>{{obj.month}}</td>
+        <td>{{obj.day}}</td>
+        <td>{{obj.hour}}</td>
+        <form action="{% url 'hello:delete' id %}" method="post">
+        {% csrf_token %}
+        <td><div class="btn"><input type="submit" value="削除実行"></div></td>
+    </tr>
+    </form>
+</table>
+</main>
+{% endblock %} 

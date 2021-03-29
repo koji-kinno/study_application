@@ -1,0 +1,19 @@
+{% extends 'hello/base.html' %}
+
+{% block title %}年間の勉強時間{% endblock %}
+
+{% block content %}
+<main>
+<h2>年間の勉強時間</h2>
+<form action="{% url 'hello:all_year' %}" method="post">     
+    <table>
+        {% csrf_token %}
+        {{form}}
+        <tr><th></th><td><input type="submit" value="検索開始"></td></tr>
+    </table>
+</form>
+
+<p>{{message|safe}}</p>
+<img src="{% url 'hello:year_plot' %}" width=600 height=350>
+</main>
+{% endblock %}

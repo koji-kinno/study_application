@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/css/style.css' %}" />
+</head>
+<body>
+<header>
+    <h1>プログラミングを頑張る人たちのアプリ</h1>
+    <div id="today">{{today.0}}/{{today.1}}/{{today.2}}</h2>
+    <div class="head_item logout"><a href= "{% url 'hello:logout' %}">ログアウト</a></div>    
+    <div class="head_item"><a href="{% url 'hello:index' %}">ホームへ戻る</a></div>
+    <div class="head_item"><a href="{% url 'hello:all_users' %}">みんなの記録を見る</a></div>      
+</header>
+
+<main>
+    <h2>こんにちは、<span class="username">{{user.username}}</span> さん</h2>
+    {% if judge == 0 %}<p> ※最初に、右下からプロフィール情報の登録を行ってください。</h2>{% endif %}
+    <h3>今月の学習記録</h3>
+    <table>
+        <tr>
+            <th  width="190">勉強した日数</th>
+            <td  width="145">{{study_day|safe}}日/ {{today.2|safe}}日</td>
+        </tr>
+        <tr>
+            <th>最大勉強時間</th>
+            <td>{{max_hour|safe}} 時間</td>
+        </tr>
+        <tr>
+            <th>勉強時間合計(実績)</th>
+            <td>{{total_hour|safe}} 時間</td>
+        </tr>
+        <tr>
+            <th>勉強時間合計(目標)</th>
+            <td>{{target_total|safe}} 時間</td>
+        </tr>
+        <tr>
+            <th>勉強時間の達成率</th>
+            <td>{{rate|safe}}</td>
+        </tr>
+        {% if judge == 1 %}
+        <tr>
+            <th></th>
+            <td><a href="{% url 'hello:create' %}" id="study_record">勉強時間を記録</a></td>
+        </tr>
+        {% endif %}
+    </table>
+    {% if judge == 1 %}{% if isprof >= 1 %}<div class="img_index"><img src="{% url 'hello:plot' %}" width=800 height=300></div>
+    <div id="graph_title">今月の勉強時間の記録　　　　　　　　　　　　　今月の勉強時間の累積</div>{% endif %}{% endif %}
+
+    {% if judge == 1 %}<div class="footer_item"><a href="{% url 'hello:find' %}">勉強の記録を検索</a></div>{% endif %}
+    {% if judge == 0 %}<div class="footer_item"><a href="{% url 'hello:create_profile' %}">プロフィール情報を新規登録</a></div>{% endif %}
+    {% if judge == 1 %}<div class="footer_item"><a href="{% url 'hello:edit_profile' %}">プロフィール編集</a></div>{% endif %}
+</main>    
+</body>
+</html>

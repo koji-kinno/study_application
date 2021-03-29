@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>アカウント作成画面</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/css/style.css' %}" />
+</head>
+<body>
+<header>
+    <h1>プログラミングを頑張る人たちのアプリ</h1>
+    <div class="head_item"><a href="{% url 'hello:all_users' %}">みんなの記録を見る</a></div>      
+</header>
+<main>
+    <h2>ようこそ！！</h2>
+    <p>このアプリは、プログラミングを頑張る人たちが、毎日の勉強時間を記録することができるアプリです。<br>自分の記録用としてだけでなく、他のユーザーの当日の勉強時間を見ることが出来ます。<br><div id="first_message">自分以外の人も頑張っているのが見ることが出来、勉強のモチベーションを持続することが出来ます。</div></p>
+    <h3><span class="under">アカウントの作成</span></h3>
+    <p>※パスワードは、第三者に予測されにくくするため使い回しを避け、大文字、小文字、数字を組み合わせたものを使用して下さい。<br>※↓ニックネームは公開されません。</p>
+    {% csrf_token %}
+    <form action="{% url 'hello:signup' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="btn">
+            <input type="submit" value="アカウント作成">
+        </div>
+    </form>
+    <p>　</p>
+    <h5>↓↓既にアカウントをお持ちの方は下からログインして下さい。</h5>
+    <p><div class="login"><a href= "{% url 'hello:login' %}">ログイン</a></div></p>
+</main>    
+</body>
+</html>

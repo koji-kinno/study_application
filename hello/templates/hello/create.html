@@ -1,0 +1,29 @@
+{% extends 'hello/base.html' %}
+
+{% block content %}
+<main>
+<h2 ><span class="under">勉強時間の記録</span></h2>
+<p>勉強時間を記録します。<br>※勉強時間は小数点1位まで記録できます。</p>
+<table>
+    <tr>
+        <th>年</th>
+        <th>月</th>
+        <th>日</th>
+        <th>勉強時間(Hr)</th>
+        <th>コメント</th>
+        <th></th>
+    </tr>
+    <tr>
+        <form action="{% url 'hello:create' %}" method="post">
+        {% csrf_token %}        
+        <td>{{form.year}}</td>
+        <td>{{form.month}}</td>
+        <td>{{form.day}}</td>
+        <td width="100">{{form.hour}}</td>
+        <td>{{form.comment}}</td>
+        <td><div class="btn"><input type="submit" value="追加"></div></td>
+        </form>
+    </tr>    
+</table>
+</main>
+{% endblock %} 

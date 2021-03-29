@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>ユーザーの勉強記録</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/css/style.css' %}" />
+</head>
+<body>
+<header>
+    <h1>プログラミングを頑張る人たちのアプリ</h1>
+    <div class="head_item"><a href="{% url 'hello:index' %}">ホームへ戻る</a></div>
+</header>
+<main>
+    <h2>みんなの今日の勉強記録</h2>
+    <table>
+        <tr>
+            <th>ユーザー</th>
+            <th>勉強の目的</th>
+            <th>使用言語</th>
+            <th>目標勉強時間</th>
+            <th>勉強時間実績</th>
+            <th>コメント</th>
+        </tr>
+        {% for item in profile_data %}
+        <tr>
+            <td>user{{item.id}}さん</td>
+            <td>{{item.purpose}}</td> 
+            <td>{{item.language}}</td>
+            <td>{{today_study_target_list.pop}} 時間</td>
+            <td>{{today_study_list.pop}} 時間</td>
+            <td>{{item.is_private}}</td>
+        </tr>
+        {% endfor %}  
+    </table>
+</main>
+</body>
+</html>

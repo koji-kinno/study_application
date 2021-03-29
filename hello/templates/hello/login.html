@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/css/style.css' %}" />
+</head>
+<body>
+<header>
+    <h1>プログラミングを頑張っている人たちの勉強時間記録アプリ</h1>
+    <div class="head_item"><a href="{% url 'hello:all_users' %}">みんなの記録を見てみる</a></div>         
+</header>
+<main>
+    <h2>☆ログインして下さい。</h2>
+    <form action="{% url 'hello:login' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="btn"><input type="submit" value="ログイン"></div>
+    </form>
+    <h6></h6>
+    <h5>初めての方はログイン後、プロフィール作成を行って下さい。</h5>
+    <h5>↓まだアカウントを持っていない場合はこちら</h5>
+    <p><div class="login"><a href= "{% url 'hello:signup' %}">アカウント作成</a></div></p>
+</main>
+</body>
+</html>

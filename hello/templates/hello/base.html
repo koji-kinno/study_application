@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/css/style.css' %}" />
+</head>
+<body>
+<header>
+    <h1>プログラミングを頑張る人たちのアプリ</h1>
+    <div class="head_item logout"><a href= "{% url 'hello:logout' %}">ログアウト</a></div>    
+    <div class="head_item"><a href="{% url 'hello:index' %}">ホームへ戻る</a></div>  
+</header>
+{% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'hello/base.html' %}
+
+{% block content %}
+
+{% if judge == 0 %}
+<main>
+<h2><span class="under">プロフィールの作成</span></h2>
+<p>　あなたのプロフィールを作成します。</p>
+<table>
+    <form action="{% url 'hello:create_profile' %}" method="post">
+        {% csrf_token %}
+        <tr>
+            <th width="200">使用言語</th>
+            <td>{{form.language|safe}}</td>
+        </tr>
+        <tr>
+            <th>勉強の目的</th>
+            <td>{{form.purpose|safe}}</td>
+        </tr>
+        <tr>
+            <th>平日の目標勉強時間</th>
+            <td>{{form.weekday_study|safe}}</td>
+        </tr>
+        <tr>
+            <th>休日の目標勉強時間</th>
+            <td>{{form.holiday_study|safe}}</td>
+        </tr>
+        <tr>
+            <th>コメント<br>※一般に公開されるコメントです。</th>
+            <td>{{form.is_private|safe}}</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>{{form.is_continue|safe}}</td>
+        </tr>
+        <tr>
+            <th> → → →</th>
+            <td><div class="btn"><input type="submit" value="作成" ></div></td></tr></td>
+        </tr>                   
+    </form>
+</table>
+{% endif %}
+<h5>※目標勉強時間は、進捗と比較するために必要なので、忘れず入力して下さい。</h5>
+<h5>　今月のの目安の勉強時間を算出するために使用します。(ここでは、月-金を平日、土日を休日としています。)</h5>
+<div class="is_continue"><p>退会を希望される方は、「使用中」→「退会希望」へ変更して下さい。</p></div>
+</main>
+{% endblock %} 

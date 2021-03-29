@@ -1,0 +1,45 @@
+{% extends 'hello/base.html' %}
+
+{% block title %}検索ページ{% endblock %}
+
+{% block content %}
+<main>
+<h2>勉強記録の検索</h2>
+<div class="head_item logout"><a href= "{% url 'hello:all_year' %}">年間の推移を見る</a></div>    
+<form action="{% url 'hello:find' %}" method="post">
+    {% csrf_token %}
+    <table>
+        <p>{% if year_is == 1 %}{{year}}年{% endif %}</p>
+        <p>{{message|safe}}</p>
+        {{form}}
+        <tr><th width="60"></th><td><div class="btn"><input type="submit" value="検索開始"></div></td></tr>
+    </table>
+</form>
+</table>
+<p>{{data.year}}</p>
+    <table>
+        <tr>
+            {% if num_data != 0 or year_is == 0 %}
+            {% if num_data != 0 %}<th>年</th>{% endif %}
+            <th>月</th>
+            <th>日</th>
+            <th>勉強時間(Hr)</th>
+            <th>コメント</th>
+            <th>編集</th>
+            <th>削除</th>
+            {% endif %}
+        </tr>
+        {% for item in data %}
+        <tr>
+            {% if num_data != 0 %}<td></td>{% endif %}
+            <td>{{item.month}}</td>
+            <td>{{item.day}}</td>
+            <td>{{item.hour}}</td>     
+            <td>{{item.comment}}</td>       
+            <td><a href="{% url 'hello:edit' item.id %}">◯</a></td>
+            <td><a href="{% url 'hello:delete' item.id %}">△</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+{% endblock %} 

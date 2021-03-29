@@ -1,0 +1,44 @@
+{% extends 'hello/base.html' %}
+
+{% block title %}プロフィールの編集{% endblock %}
+
+{% block content %}
+<main>
+<h2><span class="under">プロフィールの編集</span></h2>
+<p>プロフィールを編集します。</p>
+<table>
+    <form action="{% url 'hello:edit_profile' %}" method="POST">
+        {% csrf_token %}
+        <tr>
+            <th width="200">使用言語</th>
+            <td>{{form.language|safe}}</td>
+        </tr>
+        <tr>
+            <th>勉強の目的</th>
+            <td>{{form.purpose|safe}}</td>
+        </tr>
+        <tr>
+            <th>平日の目標勉強時間</th>
+            <td>{{form.weekday_study|safe}}</td>
+        </tr>
+        <tr>
+            <th>休日の目標勉強時間</th>
+            <td>{{form.holiday_study|safe}}</td>
+        </tr>
+        <tr>
+            <th>コメント<br>※一般に公開されるコメントです。</th>
+            <td>{{form.is_private|safe}}</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>{{form.is_continue|safe}}</td>
+        </tr>         
+        <tr>
+            <th> → → →</th>
+            <td><div class="btn"><input type="submit" value="変更" ></div></td>
+        </tr>                
+    </form>
+</table>
+<div class="is_continue"><p>退会を希望される方は、「使用中」→「退会希望」へ変更して下さい。</p></div>
+</main>
+{% endblock %} 
